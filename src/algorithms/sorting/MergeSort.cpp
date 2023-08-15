@@ -86,23 +86,27 @@ namespace test
 		matplot::bar(y);
 	}
 
-	MergeSort::MergeSort()
-	{
-
+	MergeSort::MergeSort() {
 		int* arr = sort.generate_numbers(100);
-
 		int arr_size = 1000 / sizeof(arr[0]);
+
+		matplot::figure_handle fig = matplot::figure(true);
+		fig->ion();
+
+		auto ax = matplot::gca();
+		matplot::bars_handle bar = NULL;
+
+		fig->draw();
 
 		std::cout << "Given array is \n";
 		sort.printArray(arr, arr_size);
 
-
 		// make a instance for differnet graphs
 		std::vector<double> y = sort.arrayToVector(arr, arr_size);
 
-		matplot::figure()->title("Merge Sort");
+		fig->title("Merge Sort");
 
-		matplot::bar(y);
+		bar = ax->bar(y);
 		matplot::hold(matplot::off);
 
 		merge_sort(arr, 0, arr_size - 1);
@@ -116,10 +120,13 @@ namespace test
 
 		y = sort.arrayToVector(arr, arr_size);
 
-		// plott the sorted numbers
-		matplot::bar(y);
+		bar = ax->bar(y);
+
 		// lock the console, so no code runs until the charts applicatiton is closed
-		matplot::show();
+
+		fig->should_close();
+		ax->touch();
+		matplot::figure()->should_close();
 	}
 
 	MergeSort::~MergeSort() {

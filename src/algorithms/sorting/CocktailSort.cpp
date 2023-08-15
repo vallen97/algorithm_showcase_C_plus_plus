@@ -52,12 +52,12 @@ namespace test
 			// smallest number to its rightful spot.
 			++start;
 
-			std::vector<double> y = sort.arrayToVector(a, 1000 / sizeof(a[0]));
-
 			sleep_for(.05s);
 			sleep_until(system_clock::now() + .05s);
 
+			std::vector<double> y = sort.arrayToVector(a, 1000 / sizeof(a[0]));
 			matplot::bar(y);
+		
 		}
 	}
 
@@ -65,6 +65,13 @@ namespace test
 		int* arr = sort.generate_numbers(100);
 		int arr_size = 1000 / sizeof(arr[0]);
 
+		matplot::figure_handle fig = matplot::figure(true);
+		fig->ion();
+
+		auto ax = matplot::gca();
+		matplot::bars_handle bar = NULL;
+
+		fig->draw();
 
 		std::cout << "Given array is \n";
 		sort.printArray(arr, arr_size);
@@ -72,9 +79,9 @@ namespace test
 		// make a instance for differnet graphs
 		std::vector<double> y = sort.arrayToVector(arr, arr_size);
 
-		matplot::figure()->title("CockTail Sort");
-
-		matplot::bar(y);
+		fig->title("CockTail Sort");
+		
+		bar = ax->bar(y);
 		matplot::hold(matplot::off);
 
 		cocktail_sort(arr, arr_size);
@@ -88,14 +95,14 @@ namespace test
 
 		y = sort.arrayToVector(arr, arr_size);
 
-		// plott the sorted numbers
-		matplot::bar(y);
-		// lock the console, so no code runs until the charts applicatiton is closed
-		matplot::show();
-	}
-	CocktailSort::~CocktailSort() {
-		//Memory Management
+		bar = ax->bar(y);
 
+		// lock the console, so no code runs until the charts applicatiton is closed
+
+		fig->should_close();
+		ax->touch();
+		matplot::figure()->should_close();
 	}
+	CocktailSort::~CocktailSort() {}
 }
 

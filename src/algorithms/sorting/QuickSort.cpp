@@ -46,10 +46,12 @@ namespace test
 			// is now at right place
 			int pi = partition(arr, low, high);
 
-			std::vector<double> y = sort.arrayToVector(arr, 1000 / sizeof(arr[0]));
-
 			sleep_for(.05s);
 			sleep_until(system_clock::now() + .05s);
+
+			std::vector<double> y = sort.arrayToVector(arr, 1000 / sizeof(arr[0]));
+
+
 
 			matplot::bar(y);
 
@@ -62,9 +64,16 @@ namespace test
 
 	// Driver Code
 	QuickSort::QuickSort() {
-
 		int* arr = sort.generate_numbers(100);
 		int arr_size = 1000 / sizeof(arr[0]);
+
+		matplot::figure_handle fig = matplot::figure(true);
+		fig->ion();
+
+		auto ax = matplot::gca();
+		matplot::bars_handle bar = NULL;
+
+		fig->draw();
 
 		std::cout << "Given array is \n";
 		sort.printArray(arr, arr_size);
@@ -72,9 +81,9 @@ namespace test
 		// make a instance for differnet graphs
 		std::vector<double> y = sort.arrayToVector(arr, arr_size);
 
-		matplot::figure()->title("Quick Sort");
+		fig->title("Quick Sort");
 
-		matplot::bar(y);
+		bar = ax->bar(y);
 		matplot::hold(matplot::off);
 
 		q_sort(arr, 0, arr_size - 1);
@@ -88,12 +97,13 @@ namespace test
 
 		y = sort.arrayToVector(arr, arr_size);
 
-		// plott the sorted numbers
-		matplot::bar(y);
+		bar = ax->bar(y);
+
 		// lock the console, so no code runs until the charts applicatiton is closed
-		matplot::show();
 
-
+		fig->should_close();
+		ax->touch();
+		matplot::figure()->should_close();
 	}
 
 	QuickSort::~QuickSort() {

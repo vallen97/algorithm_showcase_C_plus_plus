@@ -34,6 +34,7 @@
 #include "algorithms/sorting/TreeSort.h"
 
 
+
 GLFWwindow* InitWindow()
 {
 	// Initialise GLFW
@@ -51,7 +52,7 @@ GLFWwindow* InitWindow()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	// Open a window and create its OpenGL context
-	GLFWwindow* window = glfwCreateWindow(960, 960, "Algorithm Showcase", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(960, 540, "Flappy Birds OpenGL", NULL, NULL);
 	if (window == NULL)
 	{
 		fprintf(stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n");
@@ -106,45 +107,32 @@ int main(void)
 		ImGui_ImplGlfwGL3_NewFrame();
 		{
 			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-			ImGui::RadioButton("Do Nothing", &radioSelection, 0);
+			ImGui::RadioButton("ClearColor", &radioSelection, 0);
 			ImGui::NewLine();
 			ImGui::RadioButton("Bubble Sort", &radioSelection, 1);
-			ImGui::NewLine();
+			ImGui::SameLine();
 			ImGui::RadioButton("Cocktail Sort", &radioSelection, 2);
-			ImGui::NewLine();
+			ImGui::SameLine();
 			ImGui::RadioButton("Comb Sort", &radioSelection, 3);
 			ImGui::NewLine();
 			ImGui::RadioButton("Cycle Sort", &radioSelection, 4);
-			ImGui::NewLine();
+			ImGui::SameLine();
 			ImGui::RadioButton("Gnome Sort", &radioSelection, 5);
-			ImGui::NewLine();
+			ImGui::SameLine();
 			ImGui::RadioButton("Heap Sort", &radioSelection, 6);
 			ImGui::NewLine();
 			ImGui::RadioButton("Insertion Sort", &radioSelection, 7);
-			ImGui::NewLine();
+			ImGui::SameLine();
 			ImGui::RadioButton("Merge Sort", &radioSelection, 8);
-			ImGui::NewLine();
+			ImGui::SameLine();
 			ImGui::RadioButton("Odd Even Sort", &radioSelection, 9);
 			ImGui::NewLine();
 			ImGui::RadioButton("Quick Sort", &radioSelection, 10);
-			ImGui::NewLine();
+			ImGui::SameLine();
 			ImGui::RadioButton("Selection Sort", &radioSelection, 11);
-			ImGui::NewLine();
+			ImGui::SameLine();
 			ImGui::RadioButton("Shell Sort", &radioSelection, 12);
 			ImGui::NewLine();
-			ImGui::RadioButton("Tree Sort", &radioSelection, 13);
-
-
-			/*ImGui::RadioButton("ClearColor", &radioSelection, 0);
-			ImGui::NewLine();
-			ImGui::RadioButton("Triangle", &radioSelection, 1);
-			ImGui::NewLine();
-			ImGui::RadioButton("Uniform", &radioSelection, 2);
-			ImGui::NewLine();
-			ImGui::RadioButton("MultipleObjects", &radioSelection, 3);
-			ImGui::NewLine();
-			ImGui::RadioButton("Rotate Object", &radioSelection, 4);
-			*/
 			if (ImGui::Button("Credit Card Number"))
 			{ // Buttons return true when clicked (most widgets return true when edited/activated)
 
@@ -182,10 +170,11 @@ int main(void)
 		if (currentSelection != radioSelection)
 		{
 			switch (radioSelection)
-
 			{
 			case 0:
-				// Do nothing
+				
+				delete test;
+				test = new test::TestClearColor();
 				break;
 			case 1:
 				delete test;
@@ -236,30 +225,6 @@ int main(void)
 				test = new test::ShellSort();
 				break;
 			}
-
-			/*{
-			case 0:
-				delete test;
-				test = new test::TestClearColor();
-				break;
-			case 1:
-				delete test;
-				test = new test::TestTriangle();
-				break;
-			case 2:
-				delete test;
-				test = new test::TestUniform();
-				break;
-			case 3:
-				delete test;
-				test = new test::TestMultipleObjects();
-				break;
-
-			case 4:
-				delete test;
-				test = new test::TestRotate();
-				break;
-			}*/
 			currentSelection = radioSelection;
 		}
 

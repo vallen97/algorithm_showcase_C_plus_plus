@@ -47,15 +47,23 @@ namespace test
 		int* arr = sort.generate_numbers(100);
 		int arr_size = 1000 / sizeof(arr[0]);
 
+		matplot::figure_handle fig = matplot::figure(true);
+		fig->ion();
+
+		auto ax = matplot::gca();
+		matplot::bars_handle bar = NULL;
+
+		fig->draw();
+
 		std::cout << "Given array is \n";
 		sort.printArray(arr, arr_size);
 
 		// make a instance for differnet graphs
 		std::vector<double> y = sort.arrayToVector(arr, arr_size);
 
-		matplot::figure()->title("Shell Sort");
+		fig->title("Shell Sort");
 
-		matplot::bar(y);
+		bar = ax->bar(y);
 		matplot::hold(matplot::off);
 
 		shell_sort(arr, arr_size);
@@ -67,12 +75,13 @@ namespace test
 		sleep_for(.5s);
 		sleep_until(system_clock::now() + 1s);
 
-		y = sort.arrayToVector(arr, arr_size);
+		bar = ax->bar(y);
 
-		// plott the sorted numbers
-		matplot::bar(y);
 		// lock the console, so no code runs until the charts applicatiton is closed
-		matplot::show();
+
+		fig->should_close();
+		ax->touch();
+		matplot::figure()->should_close();
 	}
 
 	ShellSort::~ShellSort() {}
