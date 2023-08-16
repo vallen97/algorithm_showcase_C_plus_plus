@@ -5,9 +5,9 @@ A showcase of algorithms using C++
 
 
 ## Libraries used
-[Matplot++](https://alandefreitas.github.io/matplotplusplus/)
-[imgui](https://github.com/ocornut/imgui)
-[OpenGL](https://www.glfw.org/documentation.html)
+[Matplot++](https://alandefreitas.github.io/matplotplusplus/),
+[imgui](https://github.com/ocornut/imgui),
+[OpenGL](https://www.glfw.org/documentation.html), and
 [GLEW](https://github.com/nigels-com/glew)
 
 ## Sorting Algorithms
@@ -15,8 +15,8 @@ A showcase of algorithms using C++
 
 
 You will need to install 
-[vcpkg](https://vcpkg.io/en/getting-started)
-[Matplot++](https://alandefreitas.github.io/matplotplusplus/integration/package-managers/vcpkg/)
+[vcpkg](https://vcpkg.io/en/getting-started),
+[Matplot++](https://alandefreitas.github.io/matplotplusplus/integration/package-managers/vcpkg/), and
 [gnuplot](http://www.gnuplot.info/download.html)
 ### Installation for gnuplot
 Windows
