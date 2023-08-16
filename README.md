@@ -7,6 +7,8 @@ A showcase of algorithms using C++
 ## Libraries used
 [Matplot++](https://alandefreitas.github.io/matplotplusplus/)
 [imgui](https://github.com/ocornut/imgui)
+[OpenGL](https://www.glfw.org/documentation.html)
+[GLEW](https://github.com/nigels-com/glew)
 
 ## Sorting Algorithms
  All sorting algorithms can be found [here](https://www.geeksforgeeks.org/sorting-algorithms/)
