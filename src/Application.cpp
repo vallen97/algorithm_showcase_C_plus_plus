@@ -52,7 +52,7 @@ GLFWwindow* InitWindow()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	// Open a window and create its OpenGL context
-	GLFWwindow* window = glfwCreateWindow(960, 540, "Flappy Birds OpenGL", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(960, 540, "Algorithm Showcase OpenGL", NULL, NULL);
 	if (window == NULL)
 	{
 		fprintf(stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n");
@@ -133,12 +133,10 @@ int main(void)
 			ImGui::SameLine();
 			ImGui::RadioButton("Shell Sort", &radioSelection, 12);
 			ImGui::NewLine();
-			if (ImGui::Button("Credit Card Number"))
-			{ // Buttons return true when clicked (most widgets return true when edited/activated)
+			if (ImGui::Button("Credit Card Number")) {
 
 				// Loop until there is a valid card
-				while (!luhn.get_is_valid())
-				{
+				while (!luhn.get_is_valid()) {
 					// index to tell user how many cards have been generated until a valid card has been made
 					luhn.set_generated_index();
 
@@ -147,18 +145,14 @@ int main(void)
 
 					// set if the card is valid( validate the card numbers( get the card numbers to validate))
 					luhn.set_is_valid(luhn.validate_card(luhn.get_credit_numbers()));
-
-					std::cout << luhn.get_is_valid();
-
 				}
 			}
 
 			if (luhn.get_is_valid() == 1) {
 				std::string s_card_number = "";
-				for (int j = 0; j < 16; j++) {
-					// std::cout << luhn.get_credit_numbers()[j] << "\t"; //ptr[i] is equivalent to *(ptr+i)
+				for (int j = 0; j < 16; j++)
 					s_card_number.append(std::to_string(luhn.get_credit_numbers()[j]));
-				}
+
 
 				ImGui::SameLine();
 				ImGui::Text("Card Number = %d", s_card_number);
@@ -167,12 +161,9 @@ int main(void)
 		}
 
 
-		if (currentSelection != radioSelection)
-		{
-			switch (radioSelection)
-			{
+		if (currentSelection != radioSelection) {
+			switch (radioSelection) {
 			case 0:
-				
 				delete test;
 				test = new test::TestClearColor();
 				break;
@@ -238,7 +229,6 @@ int main(void)
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
-
 
 	ImGui_ImplGlfwGL3_Shutdown();
 	ImGui::DestroyContext();

@@ -1,9 +1,11 @@
 # Algorithm-Showcase
 A showcase of algorithms using C++
+1) Luhn's Algotithm
+2) Sorting Algorithms 
 
 
-## Ligbraries used
-[Matplot++] (https://alandefreitas.github.io/matplotplusplus/)
+## Libraries used
+[Matplot++](https://alandefreitas.github.io/matplotplusplus/)
 [imgui](https://github.com/ocornut/imgui)
 
 ## Sorting Algorithms
@@ -12,16 +14,18 @@ A showcase of algorithms using C++
 
 You will need to install 
 [vcpkg](https://vcpkg.io/en/getting-started)
-[Matplot++] (https://alandefreitas.github.io/matplotplusplus/integration/package-managers/vcpkg/)
- To install in the project 
-	With a project open, go to Tools->NuGet Package Manager->Package Manager Console and paste
-	Install-Package "vcpkg.C.src.vcpkg" -Source "C:\Users\sol\Programming\C++\Algorithm_Showcase-main"
+[Matplot++](https://alandefreitas.github.io/matplotplusplus/integration/package-managers/vcpkg/)
 [gnuplot](http://www.gnuplot.info/download.html)
 ### Installation for gnuplot
 Windows
- └─ during  installation you need to check add to env variables
+ └─ during  installation you need to check "add to env variables"
     
-    	If it is not checked you will need to pass the .exe location when it is instantiated
+    	If it is not checked, you will need to pass the .exe location when it is instantiated
 
+### TODO
+ Fix some sorting algorithms
+ 
+ When visualizing the sorting algorithms, hightlight the numbers that it is currently on and 
+ the number that it is being compared to.
 
-
+ Sort with the same graph and not create a new one.

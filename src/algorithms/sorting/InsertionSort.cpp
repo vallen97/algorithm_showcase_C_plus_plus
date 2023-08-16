@@ -2,10 +2,8 @@
 // https://www.geeksforgeeks.org/insertion-sort/
 #include "InsertionSort.h"
 
-
 namespace test
 {
-
 	// Function to sort an array using
 	// insertion sort
 	void InsertionSort::insertion_sort(int arr[], int n)
@@ -34,33 +32,40 @@ namespace test
 		}
 	}
 
-
-	// Driver code
 	InsertionSort::InsertionSort() {
 		int* arr = sort.generate_numbers(100);
 		int arr_size = 1000 / sizeof(arr[0]);
-
+		// make figure instance and make reactive
 		matplot::figure_handle fig = matplot::figure(true);
 		fig->ion();
 
+		// get current axes
 		auto ax = matplot::gca();
+
 		matplot::bars_handle bar = NULL;
 
+		// draw the graph
 		fig->draw();
 
+		// print the unsorted array
 		std::cout << "Given array is \n";
 		sort.printArray(arr, arr_size);
 
-		// make a instance for differnet graphs
+		// turn an array into a vector
 		std::vector<double> y = sort.arrayToVector(arr, arr_size);
 
+		// set the figure title
 		fig->title("Insrtion Sort");
 
+		// set data into bar graph
 		bar = ax->bar(y);
+		// do not replace the next plot
 		matplot::hold(matplot::off);
 
+		// do the sorting
 		insertion_sort(arr, arr_size);
 
+		// print the sorted numbers
 		std::cout << "\nSorted array is \n";
 		sort.printArray(arr, arr_size);
 
@@ -68,19 +73,15 @@ namespace test
 		sleep_for(.5s);
 		sleep_until(system_clock::now() + 1s);
 
+		// replot the sorted numbers
 		y = sort.arrayToVector(arr, arr_size);
-
 		bar = ax->bar(y);
 
-		// lock the console, so no code runs until the charts applicatiton is closed
-
+		// should close the graph
 		fig->should_close();
 		ax->touch();
 		matplot::figure()->should_close();
 	}
 
-	InsertionSort::~InsertionSort() {
-		//Memory Management
-
-	}
+	InsertionSort::~InsertionSort() { }
 }

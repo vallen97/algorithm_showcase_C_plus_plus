@@ -1,9 +1,8 @@
-// C++ implementation of Comb Sort
+// https://www.geeksforgeeks.org/comb-sort/
 #include "CombSort.h"
 
 namespace test
 {
-
 	// To find gap between elements
 	int getNextGap(int gap)
 	{
@@ -58,15 +57,19 @@ namespace test
 
 	// Driver program
 	CombSort::CombSort() {
-		int* arr = sort.generate_numbers(100);
+		// make random numbers 
+		int* arr = sort.generate_numbers(1000);
 		int arr_size = 1000 / sizeof(arr[0]);
 
+		// make figure and set reactive
 		matplot::figure_handle fig = matplot::figure(true);
 		fig->ion();
 
+		// get current axes
 		auto ax = matplot::gca();
 		matplot::bars_handle bar = NULL;
 
+		// draw plot
 		fig->draw();
 
 		std::cout << "Given array is \n";
@@ -76,7 +79,9 @@ namespace test
 		std::vector<double> y = sort.arrayToVector(arr, arr_size);
 		fig->title("Comb Sort");
 
+		// plot unsorted numbers
 		bar = ax->bar(y);
+		// do not replace the next plot
 		matplot::hold(matplot::off);
 
 		comb_sort(arr, arr_size);
@@ -88,17 +93,15 @@ namespace test
 		sleep_for(.5s);
 		sleep_until(system_clock::now() + 1s);
 
+		// replot the sorted numbers
 		y = sort.arrayToVector(arr, arr_size);
-
 		bar = ax->bar(y);
 
-		// lock the console, so no code runs until the charts applicatiton is closed
-
+		// should close the graph
 		fig->should_close();
 		ax->touch();
 		matplot::figure()->should_close();
 	}
 
 	CombSort::~CombSort() {}
-
 }

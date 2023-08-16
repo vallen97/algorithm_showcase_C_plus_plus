@@ -1,11 +1,8 @@
-#pragma once
-
 // https://www.geeksforgeeks.org/merge-sort/
 #include "MergeSort.h"
 
 namespace test
 {
-
 	// Merges two subarrays of array[].
 	// First subarray is arr[begin..mid]
 	// Second subarray is arr[mid+1..end]
@@ -90,27 +87,37 @@ namespace test
 		int* arr = sort.generate_numbers(100);
 		int arr_size = 1000 / sizeof(arr[0]);
 
+		// make figure instance and make reactive
 		matplot::figure_handle fig = matplot::figure(true);
 		fig->ion();
 
+		// get current axes
 		auto ax = matplot::gca();
+
 		matplot::bars_handle bar = NULL;
 
+		// draw the graph
 		fig->draw();
 
+		// print the unsorted array
 		std::cout << "Given array is \n";
 		sort.printArray(arr, arr_size);
 
-		// make a instance for differnet graphs
+		// turn an array into a vector
 		std::vector<double> y = sort.arrayToVector(arr, arr_size);
 
+		// set the figure title
 		fig->title("Merge Sort");
 
+		// set data into bar graph
 		bar = ax->bar(y);
+		// do not replace the next plot
 		matplot::hold(matplot::off);
 
+		// do the sorting
 		merge_sort(arr, 0, arr_size - 1);
 
+		// print the sorted numbers
 		std::cout << "\nSorted array is \n";
 		sort.printArray(arr, arr_size);
 
@@ -118,12 +125,11 @@ namespace test
 		sleep_for(.5s);
 		sleep_until(system_clock::now() + 1s);
 
+		// replot the sorted numbers
 		y = sort.arrayToVector(arr, arr_size);
-
 		bar = ax->bar(y);
 
-		// lock the console, so no code runs until the charts applicatiton is closed
-
+		// should close the graph
 		fig->should_close();
 		ax->touch();
 		matplot::figure()->should_close();

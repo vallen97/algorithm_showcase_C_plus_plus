@@ -1,9 +1,8 @@
-// C++ program to implement Tree Sort
+// https://www.geeksforgeeks.org/tree-sort/
 #include "TreeSort.h"
 
 namespace test
 {
-
 	struct Node
 	{
 		int key;
@@ -28,8 +27,6 @@ namespace test
 			storeSorted(root->left, arr, i);
 			arr[i++] = root->key;
 			storeSorted(root->right, arr, i);
-
-
 		}
 	}
 
@@ -46,8 +43,6 @@ namespace test
 		else if (key > node->key)
 			node->right = insert(node->right, key);
 
-
-
 		/* return the (unchanged) Node pointer */
 		return node;
 	}
@@ -60,19 +55,13 @@ namespace test
 		// Construct the BST
 		root = insert(root, arr[0]);
 
-
-
 		for (int i = 1; i < n; i++)
 			root = insert(root, arr[i]);
-
-
 
 		// Store inorder traversal of the BST
 		// in arr[]
 		int i = 0;
 		storeSorted(root, arr, i);
-
-
 	}
 
 	// Driver Program to test above functions
@@ -81,20 +70,37 @@ namespace test
 		int* arr = sort.generate_numbers(100);
 		int arr_size = 1000 / sizeof(arr[0]);
 
+		// make figure instance and make reactive
+		matplot::figure_handle fig = matplot::figure(true);
+		fig->ion();
 
+		// get current axes
+		auto ax = matplot::gca();
+
+		matplot::bars_handle bar = NULL;
+
+		// draw the graph
+		fig->draw();
+
+		// print the unsorted array
 		std::cout << "Given array is \n";
 		sort.printArray(arr, arr_size);
 
-		// make a instance for differnet graphs
+		// turn an array into a vector
 		std::vector<double> y = sort.arrayToVector(arr, arr_size);
 
+		// set the figure title
 		matplot::figure()->title("Tree Sort");
 
+		// set data into bar graph
 		matplot::bar(y);
+		// do not replace the next plot
 		matplot::hold(matplot::off);
 
+		// do the sorting
 		tree_sort(arr, arr_size);
 
+		// print the sorted numbers
 		std::cout << "\nSorted array is \n";
 		sort.printArray(arr, arr_size);
 
@@ -102,12 +108,14 @@ namespace test
 		sleep_for(.5s);
 		sleep_until(system_clock::now() + 1s);
 
+		// replot the sorted numbers
 		y = sort.arrayToVector(arr, arr_size);
+		bar = ax->bar(y);
 
-		// plott the sorted numbers
-		matplot::bar(y);
-		// lock the console, so no code runs until the charts applicatiton is closed
-		matplot::show();
+		// should close the graph
+		fig->should_close();
+		ax->touch();
+		matplot::figure()->should_close();
 	}
 
 	TreeSort::~TreeSort() {}
